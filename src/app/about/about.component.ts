@@ -1,18 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component, ViewChild, ViewContainerRef, ComponentFactory,
+  ComponentRef, ComponentFactoryResolver, OnDestroy
+} from '@angular/core';
+import { AlertComponent } from '../alert/exe-alert.component';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnDestroy {
 
-  name="about";
-  todo="what";
+  name = "about";
+  todo = "what";
 
-  constructor() { }
+  componentRef: ComponentRef<AlertComponent>;
 
-  ngOnInit(): void {
+  @ViewChild("alertContainer", { read: ViewContainerRef }) container: ViewContainerRef;
+
+  constructor(private resolver: ComponentFactoryResolver) { }
+
+  createComponent(type: string) {
+    this.container.clear();
+    const factory: ComponentFactory<AlertComponent> =
+      this.resolver.resolveComponentFactory(AlertComponent);
+    this.componentRef = this.container.createComponent(factory);
+    this.componentRef.instance.type = type;
+    this.componentRef.instance.output.subscribe((msg: string) => console.log(msg));
   }
 
+  ngOnDestroy() {
+    this.componentRef.destroy();
+  }
 }

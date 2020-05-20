@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SignupFormComponent } from './signup/signup-form.component'
 import { Signup2FormComponent } from './signup2/signup2-form.component'
+import {AlertComponent} from './alert/exe-alert.component'
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { Signup2FormComponent } from './signup2/signup2-form.component'
     ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AlertComponent],
 })
 export class AppModule { }

@@ -2,3 +2,6 @@
 <p>{{name}}</p>
 <input type="text" [(ngModel)]="todo"/>
 <p>{{todo}}</p>
+<ng-template #alertContainer></ng-template>
+<button (click)="createComponent('success')">Create success alert</button>
+<button (click)="createComponent('danger')">Create danger alert</button>
