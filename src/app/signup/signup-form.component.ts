@@ -4,23 +4,25 @@ import { User } from './signup.interface';
 @Component({
   selector: 'signup-form',
   template: `
-    <form novalidate #f="ngForm">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
       <label>
         <span>Full name</span>
         <input
           type="text"
           name="name"
-          placeholder="Your full name">
-          <!-- [(ngModel)]="user.name" -->
+          placeholder="Your full name"
+          required
+          [(ngModel)]="user.name">
       </label>
-      <div>
+      <div ngModelGroup="account">
         <label>
           <span>Email address</span>
           <input
             type="email"
             name="email"
             placeholder="Your email address"
-            ngModel>
+            required
+            [(ngModel)]="user.account.email">
         </label>
         <label>
           <span>Confirm address</span>
@@ -28,12 +30,14 @@ import { User } from './signup.interface';
             type="email"
             name="confirm"
             placeholder="Confirm your email address"
-            ngModel>
+            required
+            [(ngModel)]="user.account.confirm">
         </label>
       </div>
-      <button type="submit">Sign up</button>
+      <button type="submit" [disabled]="f.invalid">Sign up</button>
+      <p>{{ f.value | json }}</p>
+      <p>{{ user | json }}</p>
     </form>
-    <!-- <span>{{ user | json }}</span> -->
   `
 })
 export class SignupFormComponent {
@@ -44,4 +48,7 @@ export class SignupFormComponent {
       confirm: ''
     }
   };
+  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+    console.log(value, valid);
+  }
 }
