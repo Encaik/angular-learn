@@ -13,7 +13,6 @@ export class AboutComponent implements OnDestroy {
 
   name = "about";
   todo = "what";
-
   componentRef: ComponentRef<AlertComponent>;
 
   @ViewChild("alertContainer", { read: ViewContainerRef }) container: ViewContainerRef;
@@ -26,7 +25,6 @@ export class AboutComponent implements OnDestroy {
       this.resolver.resolveComponentFactory(AlertComponent);
     this.componentRef = this.container.createComponent(factory);
     this.componentRef.instance.type = type;
-    this.componentRef.instance.output.subscribe((msg: string) => console.log(msg));
   }
 
   ngOnDestroy() {

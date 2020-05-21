@@ -9,7 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SignupFormComponent } from './signup/signup-form.component'
 import { Signup2FormComponent } from './signup2/signup2-form.component'
-import {AlertComponent} from './alert/exe-alert.component'
+import { AlertComponent } from './alert/exe-alert.component'
+import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {AlertComponent} from './alert/exe-alert.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DynamicFormModule
   ],
   providers: [],
   bootstrap: [AppComponent],
